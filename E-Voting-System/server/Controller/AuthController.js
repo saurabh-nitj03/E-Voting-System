@@ -6,6 +6,8 @@ import User from "../Models/User.js";
 import Election from "../Models/Election.js";
 import Candidate from "../Models/Candidate.js";
 import nodemailer from "nodemailer";
+import Voted from "../Models/Voted.js";
+import exp from "constants";
 
 // http://localhost:5000/api/auth/register
 //
@@ -42,7 +44,9 @@ export const register = {
       try {
         console.log("Eneterd in register route");
         const newUser = await User.create(req.body);
-        console.log(newUser);
+        // console.log(newUser);
+        // console.log(process.env.EMAIL);
+        // console.log(process.env.EMAILPASSWORD);
 
         const mailContent = "Thank You For Joining the Voting System";
 
@@ -51,7 +55,7 @@ export const register = {
         const findUser = await User.findOne({ email: req.body.email });
         //Try to use newUser
 
-        if (sendMail(mailContent, mailSubject, findUser)) {
+        if (await sendMail(mailContent, mailSubject, findUser)) {
           return res.status(201).send("Email Sent");
         } else {
           return res.status(301).send("Email Sending Failed");
@@ -81,13 +85,31 @@ export const login = {
       if (findUser.password !== req.body.password) {
         return res.status(202).send("Invalid Password");
       }
-
+      const userVoted=await Voted.findOne({username:req.body.username,electionId:req.body.election._id})
+      if(userVoted){
+        return res.status(203).send("You have already Voted");
+      }
+     
       return res.status(201).send(findUser);
     } catch (e) {
       return res.status(500).send("Server Error");
     }
   },
+
 };
+
+export const voting={
+  vote:async(req,res)=>{
+    const username=req.body.username;
+    const electionId=req.body.election._id;
+
+    await Voted.create({
+      username:req.body.username,
+      electionId:req.body.election._id
+    })
+    return res.status(201).send("added");
+  }
+}
 
 export const users = {
   deleteUserProfile: (user) => {
@@ -298,7 +320,7 @@ export const elections = {
 };
 
 const sendMail = async (mailContent, mailSubject, user) => {
-  var transporter = nodemailer.createTransport({
+  let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.EMAIL,
@@ -306,20 +328,21 @@ const sendMail = async (mailContent, mailSubject, user) => {
     },
   });
 
-  var mailOptions = {
+  let mailOptions = {
     from: process.env.EMAIL,
     to: user.email,
     subject: mailSubject,
     text: mailContent,
   };
 
-  await transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      return false;
-    } else {
-      return true;
-    }
-  });
+  try {
+    let info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + info.response);
+    return true;
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    return false;
+  }
 };
 
 export const a = {

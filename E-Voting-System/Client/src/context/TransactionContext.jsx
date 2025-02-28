@@ -27,7 +27,11 @@ export const TransactionProvider = ({ children }) => {
 
   const connectWallet = async () => {
     try {
-      if (!ethereum) return alert("Please install MetaMask.");
+      if (!ethereum) {
+        alert("Please install MetaMask.");
+        window.location.href = "/";
+        return;
+      }
 
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
@@ -45,7 +49,7 @@ export const TransactionProvider = ({ children }) => {
     try {
       if (ethereum) {
         const transactionsContract = createEthereumContract();
-
+        console.log(transactionsContract);
         const transactionHash = await transactionsContract.addToBlockchain(
           currentAccount,
           user_id,
@@ -57,10 +61,10 @@ export const TransactionProvider = ({ children }) => {
         await transactionHash.wait();
         console.log(`Success - ${transactionHash.hash}`);
 
-        const transactionsCount =
-          await transactionsContract.getTransactionCount();
-
-        console.log(transactionCount);
+        // console.log("nnjvcsk");
+        // // const transactionsCount = await transactionsContract.getTransactionCount();
+        // console.log("ncos");
+        // console.log(transactionsCount);
 
         return { valid: true, mess: "Transaction Successfull" };
       } else {
@@ -68,6 +72,7 @@ export const TransactionProvider = ({ children }) => {
         return { valid: false, mess: "No ethereum object" };
       }
     } catch (error) {
+      console.log(error);
       if (error.code === "ACTION_REJECTED") {
         return { valid: false, mess: "User Rejected Transaction" };
       } else {
@@ -76,33 +81,88 @@ export const TransactionProvider = ({ children }) => {
     }
   };
 
+  // const getAllTransactions = async () => {
+  //   try {
+  //     if (ethereum) {
+  //       const transactionsContract = createEthereumContract();
+  //       console.log("Before getting transaction");
+  //       const availableTransactions =
+  //         await transactionsContract.getAllTransaction();
+  //       console.log(availableTransactions, "in context");
+  //       const structuredTransactions = availableTransactions.map(
+  //         (transaction) => ({
+  //           addressFrom: transaction.from,
+  //           timestamp: new Date(
+  //             transaction.timestamp.toNumber() * 1000
+  //           ).toLocaleString(),
+  //           election_id: transaction.election_id,
+  //           candidate_id: transaction.candidate_id,
+  //           user_id: transaction.user_id,
+  //         })
+  //       );
+
+  //       setTransactions(structuredTransactions);
+  //       return structuredTransactions;
+  //     } else {
+  //       console.log("Ethereum is not present");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const getAllTransactions = async () => {
     try {
-      if (ethereum) {
-        const transactionsContract = createEthereumContract();
-
-        const availableTransactions =
-          await transactionsContract.getAllTransaction();
-
-        const structuredTransactions = availableTransactions.map(
-          (transaction) => ({
-            addressFrom: transaction.from,
-            timestamp: new Date(
-              transaction.timestamp.toNumber() * 1000
-            ).toLocaleString(),
-            election_id: transaction.election_id,
-            candidate_id: transaction.candidate_id,
-            user_id: transaction.user_id,
-          })
-        );
-
-        setTransactions(structuredTransactions);
-        return structuredTransactions;
-      } else {
+      if (!window.ethereum) {
         console.log("Ethereum is not present");
+        return;
+      }
+  
+      const transactionsContract = createEthereumContract();
+      console.log(transactionsContract);
+      console.log("Fetching transactions from blockchain...");
+      const availableTransactions = await transactionsContract.getAllTransaction();
+  
+      console.log("Raw transactions:", availableTransactions);
+  
+      const structuredTransactions = availableTransactions.map((transaction) => ({
+        addressFrom: transaction.from,
+        timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
+        election_id: transaction.election_id,
+        candidate_id: transaction.candidate_id,
+        user_id: transaction.user_id,
+      }));
+  
+      console.log("Formatted Transactions:", structuredTransactions);
+      setTransactions(structuredTransactions);
+      return structuredTransactions;
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+  };
+  const checkDuplicateVote = async (user_id, election_id) => {
+    try {
+      if (!ethereum) {
+        alert("Please install MetaMask.");
+        window.location.href = "/";
+        return;
+      }
+
+      const transactionsContract = createEthereumContract();
+      console.log(transactionsContract);
+      const hasVoted = await transactionsContract.hasUserVoted(
+        String(election_id),
+        String(user_id),
+        { gasLimit: 300000 }
+      );
+      console.log(hasVoted, "Has user voted?");
+
+      if (hasVoted) {
+        alert("You have already voted in this election.");
+        window.location.href = "/";
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error checking duplicate vote:", error);
+      alert("An error occurred while checking your vote status.");
     }
   };
 
@@ -114,6 +174,7 @@ export const TransactionProvider = ({ children }) => {
           currentAccount,
           sendTransaction,
           getAllTransactions,
+          checkDuplicateVote,
           transactions,
         }}
       >

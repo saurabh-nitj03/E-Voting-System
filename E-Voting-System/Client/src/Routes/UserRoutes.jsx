@@ -79,5 +79,15 @@ export const userRoutes = [
     ,
   </Route>,
   <Route path="/login" key="login" element={<UserLogin />} />,
-  <Route path="/register" key="register" element={<UserRegister />} />,
+  <Route
+    path="/register"
+    key="register"
+    element={
+      <>
+        <Navbar />
+        <UserRegister />
+        <Footer />
+      </>
+    }
+  />,
 ];

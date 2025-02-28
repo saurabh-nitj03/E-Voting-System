@@ -26,11 +26,11 @@ const UserSchema = new Mongoose.Schema(
       max: 50,
     },
     mobile: {
-      type: String,
+      type: Number,
       required: true,
       unique: true,
-      minLength: 1,
-      maxLength: 10,
+      minLength: 10,
+      maxLength: 15,
     },
     location: {
       type: String,

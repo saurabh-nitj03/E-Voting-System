@@ -7,6 +7,7 @@ import {
   candidates,
   phase,
   votingMail,
+  voting,
   a,
 } from "../Controller/AuthController.js";
 
@@ -37,5 +38,6 @@ router.post("/user/edit/:id", users.edit);
 
 router.post("/op", a.sc);
 router.post("/votingEmail", votingMail.send);
+router.post("/voted",voting.vote);
 
 export default router;

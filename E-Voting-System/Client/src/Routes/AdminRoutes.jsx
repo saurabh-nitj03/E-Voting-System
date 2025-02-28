@@ -15,9 +15,11 @@ import ViewPhase from "../Pages/admin/Phase/ViewPhase";
 import EditPhase from "../Pages/admin/Phase/EditPhase";
 import ViewResult from "../Pages/admin/Result/ViewResult";
 import ViewElectionResult from "../Pages/admin/Result/ViewElectionResult";
+import Navbar from "../Components/User/Navbar.jsx"
+import Footer from "../Components/User/Footer.jsx";
 
 export const adminRoutes = [
-  <Route path="/admin" exact element={<AdminLogin />} key="adminLogin" />,
+  <Route path="/admin" exact element={<><Navbar/> <AdminLogin /> <Footer/></>} key="adminLogin" />,
   <Route path="/admin" element={<Sidebar />} key="adminData">
     <Route
       path="dashboard"

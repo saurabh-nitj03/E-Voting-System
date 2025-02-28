@@ -30,51 +30,312 @@
 //     </ThemeProvider>
 //   );
 // }
+// import * as React from "react";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { Box, Button, Typography } from "@mui/material";
+// import { Link } from "react-router-dom";
+
+// const theme = createTheme();
+
+// export default function Home() {
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <CssBaseline />
+//       <main>
+//         <Box
+//           sx={{
+//             display: "flex",
+//             flexDirection: "column",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             minHeight: "calc(100vh - 128px)",
+//             gap: 2,
+//           }}
+//         >
+//           <Typography variant="h4" gutterBottom>
+//             Welcome to the Online Voting System
+//           </Typography>
+//           <Box sx={{ display: "flex", gap: 2 }}>
+//             <Button
+//               component={Link}
+//               to="/register"
+//               variant="contained"
+//               color="primary"
+//             >
+//               Register
+//             </Button>
+//             {/* <Button
+//               component={Link}
+//               to="/login"
+//               variant="outlined"
+//               color="primary"
+//             >
+//               Login
+//             </Button> */}
+//           </Box>
+//         </Box>
+//       </main>
+//     </ThemeProvider>
+//   );
+// }
+
+// import * as React from "react";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { Typography, Box, Button, Container, Paper, Grid, Card, CardContent } from "@mui/material";
+// import { Link } from "react-router-dom";
+
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#1976d2",
+//     },
+//     secondary: {
+//       main: "#ff9800",
+//     },
+//   },
+//   typography: {
+//     h4: {
+//       fontWeight: 600,
+//     },
+//     body1: {
+//       fontSize: "1.1rem",
+//     },
+//   },
+// });
+
+// export default function Home() {
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <CssBaseline />
+     
+      
+//       <main>
+//         <Container>
+//           <Box
+//             sx={{
+//               display: "flex",
+//               flexDirection: "column",
+//               alignItems: "center",
+//               justifyContent: "center",
+//               minHeight: "60vh",
+//               textAlign: "center",
+//               padding: 4,
+//               backgroundColor: "#f5f5f5",
+//               borderRadius: 2,
+//             }}
+//           >
+//             <Typography variant="h4" gutterBottom>
+//               Welcome to the Blockchain-based Online Voting System
+//             </Typography>
+//             <Typography variant="body1" paragraph>
+//               Our platform ensures secure, transparent, and tamper-proof elections using blockchain technology.
+//             </Typography>
+//             <Button component={Link} to="/register" variant="contained" color="primary" sx={{ mt: 2 }}>
+//               Register to Vote
+//             </Button>
+//           </Box>
+
+//           {/* About Section */}
+//           <Grid container spacing={3} sx={{ mt: 4 }}>
+//             <Grid item xs={12} md={6}>
+//               <Card elevation={4}>
+//                 <CardContent>
+//                   <Typography variant="h5" gutterBottom>Why Blockchain Voting?</Typography>
+//                   <Typography variant="body1">
+//                     Blockchain technology guarantees security and transparency, eliminating fraud and ensuring each vote counts.
+//                   </Typography>
+//                 </CardContent>
+//               </Card>
+//             </Grid>
+//             <Grid item xs={12} md={6}>
+//               <Card elevation={4}>
+//                 <CardContent>
+//                   <Typography variant="h5" gutterBottom>Secure & Anonymous</Typography>
+//                   <Typography variant="body1">
+//                     Your vote remains anonymous, encrypted, and securely stored on the blockchain, preventing tampering or alteration.
+//                   </Typography>
+//                 </CardContent>
+//               </Card>
+//             </Grid>
+//           </Grid>
+
+//           {/* How to Vote Section */}
+//           <Paper elevation={3} sx={{ padding: 3, marginTop: 4, backgroundColor: "#e3f2fd" }}>
+//             <Typography variant="h5" gutterBottom>How to Vote?</Typography>
+//             <Typography variant="body1" paragraph>
+//               1. Register on the platform with required credentials.
+//             </Typography>
+//             <Typography variant="body1" paragraph>
+//               2. Check for the elections happening.
+//             </Typography>
+//             <Typography variant="body1" paragraph>
+//               3. Choose your preferred candidate and cast your vote.
+//             </Typography>
+//             <Typography variant="body1" paragraph>
+//               4. Your vote is recorded securely on the blockchain and is immutable.
+//             </Typography>
+//           </Paper>
+//         </Container>
+        
+//       </main>
+
+//     </ThemeProvider>
+//   );
+// }
+
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box, Button, Typography } from "@mui/material";
+import { Typography, Box, Button, Container, Paper, Grid, Card, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+    },
+    secondary: {
+      main: "#ff9800",
+    },
+  },
+  typography: {
+    h4: {
+      fontWeight: 600,
+    },
+    body1: {
+      fontSize: "1.1rem",
+    },
+  },
+});
 
 export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "calc(100vh - 128px)",
-            gap: 2,
-          }}
-        >
-          <Typography variant="h4" gutterBottom>
-            Welcome to the Online Voting System
-          </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <Button
-              component={Link}
-              to="/register"
-              variant="contained"
-              color="primary"
-            >
-              Register
-            </Button>
-            {/* <Button
-              component={Link}
-              to="/login"
-              variant="outlined"
-              color="primary"
-            >
-              Login
-            </Button> */}
-          </Box>
-        </Box>
+        <Container>
+          {/* Split into Two Columns */}
+          <Grid container spacing={4} sx={{ mt: 4 }}>
+            {/* Welcome Content (Left Side) */}
+            <Grid item xs={12} md={8}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "center",
+                  height: "100%",
+                  textAlign: "left",
+                }}
+              >
+                <Typography variant="h4" gutterBottom>
+                  Welcome to the Blockchain-based Online Voting System
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  Our platform leverages cutting-edge blockchain technology to ensure secure, transparent, and tamper-proof elections. Whether you're a voter, candidate, or election administrator, we provide a seamless and trustworthy voting experience.
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  <strong>Why choose us?</strong>
+                </Typography>
+                <Typography variant="body1" component="ul" paragraph>
+                  <li>End-to-end encryption for maximum security.</li>
+                  <li>Decentralized voting to eliminate fraud.</li>
+                  <li>Real-time results with complete transparency.</li>
+                  <li>User-friendly interface for easy voting.</li>
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  Join us in revolutionizing the way elections are conducted. Your vote matters, and we ensure it counts!
+                </Typography>
+              </Box>
+            </Grid>
+
+            {/* Register Section (Right Side) */}
+            <Grid item xs={12} md={4}>
+              <Paper
+                elevation={4}
+                sx={{
+                  padding: 3,
+                  backgroundColor: "#e3f2fd",
+                  textAlign: "center",
+                  borderRadius: 2,
+                }}
+              >
+                <Typography variant="h6" gutterBottom>
+                  Ready to Vote?
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Register now to participate in secure and transparent elections.
+                </Typography>
+                <Button
+                  component={Link}
+                  to="/register"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  sx={{ mt: 2 }}
+                >
+                  Register to Vote
+                </Button>
+                <Typography variant="body2" sx={{ mt: 2 }}>
+                  Already registered?{" "}
+                  <Link to="/election" style={{ color: "#1976d2", textDecoration: "none" }}>
+                    go to election
+                  </Link>
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+
+          {/* About Section */}
+          <Grid container spacing={3} sx={{ mt: 4 }}>
+            <Grid item xs={12} md={6}>
+              <Card elevation={4}>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    Why Blockchain Voting?
+                  </Typography>
+                  <Typography variant="body1">
+                    Blockchain technology guarantees security and transparency, eliminating fraud and ensuring each vote counts.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Card elevation={4}>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    Secure & Anonymous
+                  </Typography>
+                  <Typography variant="body1">
+                    Your vote remains anonymous, encrypted, and securely stored on the blockchain, preventing tampering or alteration.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+
+          {/* How to Vote Section */}
+          <Paper elevation={3} sx={{ padding: 3, marginTop: 4, marginBottom:4, backgroundColor: "#e3f2fd", borderRadius: 2 }}>
+            <Typography variant="h5" gutterBottom>
+              How to Vote?
+            </Typography>
+            <Typography variant="body1" paragraph>
+              1. Register on the platform with required credentials.
+            </Typography>
+            <Typography variant="body1" paragraph>
+              2. Check for the elections happening.
+            </Typography>
+            <Typography variant="body1" paragraph>
+              3. Choose your preferred candidate and cast your vote.
+            </Typography>
+            <Typography variant="body1" paragraph>
+              4. Your vote is recorded securely on the blockchain and is immutable.
+            </Typography>
+          </Paper>
+        </Container>
+            <hr></hr>
       </main>
     </ThemeProvider>
   );

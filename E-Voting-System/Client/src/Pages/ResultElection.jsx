@@ -22,8 +22,11 @@ const ResultElection = () => {
     async function getData() {
       let res = await axios.get(serverLink + "result/elections");
       let users = res.data;
+      console.log(res.data);
       let transactions = await getAllTransactions();
+      console.log(transactions);
       let result = await getResult(transactions);
+      console.log(result);
       let ans = [];
       // eslint-disable-next-line
       users.map((item) => {
