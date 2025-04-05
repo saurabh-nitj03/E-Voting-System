@@ -11180,12 +11180,12 @@
     "31337": {
       "events": {},
       "links": {},
-      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "transactionHash": "0x944b54cc65a3ad9abdfae71e2ba73c7b9852012d5c2e784fc2e3ea0be7ec44df"
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "transactionHash": "0x0b9599e6ccf42fd761f2c8477f6b48934000b73217c453b05af108eb82e56969"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-02-28T17:38:32.756Z",
+  "updatedAt": "2025-03-02T19:14:03.825Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

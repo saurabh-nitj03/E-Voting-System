@@ -92,6 +92,7 @@ const Login = () => {
   
 
   const handleSubmit = async (e) => {
+    console.log("in login")
     e.preventDefault();
     const password = e.target.password.value;
     const username = e.target.username.value;

@@ -179,7 +179,7 @@ export default function AdminLogin() {
     const data = new FormData(event.currentTarget);
     let password = data.get("password");
     let email = data.get("email");
-    if (password === "admin123" && email === "admin@gmail.com") {
+    if (password === "saurabh123" && email === "saurabh@gmail.com") {
       navigate("/admin/dashboard");
     } else {
       console.log("Failed");
